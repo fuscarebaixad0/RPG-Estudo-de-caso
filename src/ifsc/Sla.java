@@ -36,7 +36,7 @@ public class Sla {
 		nomeCriatura = scanner.nextLine();
 		criatura.setNomeCriatura(nomeCriatura);
 		System.out.println(
-				"O temivel criatura " + criatura.getNomeCriatura() + " te aguarda!!!");
+				"A temivel criatura " + criatura.getNomeCriatura() + " te aguarda!!!");
 		
 		System.out.println("Além desses inimigos, você tambem encontrará amigos. Um personagem em especifico te acompanhará em muitas aventuras no futuro");
 		
@@ -127,7 +127,7 @@ public class Sla {
 				String morte;
 				return;
 			case 2:
-				System.out.println("Você foi para a Taverna e lá conheceu um viking chamado ... .");//Adicionar nome companheiro
+				System.out.println("Você foi para a Taverna e lá conheceu um viking chamado " + companheiro.getNomeCompanheiro() +" ");
 				break;
 			default:
 				System.out.println("Opção inválida. Escolha novamente.");
@@ -138,19 +138,19 @@ public class Sla {
 		}
 
 		int pedidoAjuda;
-		System.out.println("Você foi para a Taverna e lá conheceu um homem alto e ameaçador, um viking chamado ... que te diz ter ouvido boatos sobre o paradeiro da lâmina eldir. Ele afirma ter ouvido habitantes discutindo sobre o esconderijo do temido lobo ..., local onde existem supostas gravuras rupestres indicando o paradeiro da lâmina. Sabendo para onde ir, você o convida para ir com você.");
-		while (true) { //Adicionar nome companheiro e nome lobo
-			System.out.println("Como você pede ajuda a ...?");//Adicionar nome companheiro
+		System.out.println("Você foi para a Taverna e lá conheceu um homem alto e ameaçador, um viking chamado "+ companheiro.getNomeCompanheiro() +"que te diz ter ouvido boatos sobre o paradeiro da lâmina eldir. Ele afirma ter ouvido habitantes discutindo sobre o esconderijo do temido lobo "+ lobo.getNomeLobo() +", local onde existem supostas gravuras rupestres indicando o paradeiro da lâmina. Sabendo para onde ir, você o convida para ir com você.");
+		while (true) { 
+			System.out.println("Como você pede ajuda a "+ companheiro.getNomeCompanheiro() + "?");
 			System.out.println("1 - Oferecendo dinheiro em troca");
 			System.out.println("2 - Implorando");
 			pedidoAjuda = scanner.nextInt();
 
 			switch (pedidoAjuda) {
 			case 1:
-				System.out.println("... aceita seu pedido e vocês seguem viagem até o esconderijo de ... ."); //Adicionar nome companheiro e nome lobo
+				System.out.println(""+ companheiro.getNomeCompanheiro() +" aceita seu pedido e vocês seguem viagem até o esconderijo de ... .");
 				break;
 			case 2:
-				System.out.println("... recusa seu pedido e você decide derrotar ... sozinho. (VOCÊ MORRE)");//Adicionar nome companheiro e nome lobo
+				System.out.println(""+ companheiro.getNomeCompanheiro() +" recusa seu pedido e você decide derrotar ... sozinho. (VOCÊ MORRE)"); 
 				return;
 			default:
 				System.out.println("Opção inválida. Escolha novamente.");
@@ -177,16 +177,16 @@ public class Sla {
 			System.out.println("Vocês chegam sem nenhum problema.");
 			break;
 		default:
-			System.out.println("Escolha inválida. Você nunca chega até ... . (VOCÊ MORRE)");//Adicionar nome lobo
+			System.out.println("Escolha inválida. Você nunca chega até "+ lobo.getNomeLobo() +". (VOCÊ MORRE)");
 			return;
 		}
 		System.out.println(
-				"Ao chegar no esconderijo de ..., você e ... se preparam para atacar e entram em uma caverna escura e úmida.");//Adicionar nome companheiro e nome lobo
+				"Ao chegar no esconderijo de "+ lobo.getNomeLobo() +", você e "+companheiro.getNomeCompanheiro()+" se preparam para atacar e entram em uma caverna escura e úmida.");
 		System.out.println(
-				"Lá dentro, ... parece assustado e tenta atacá-los com suas garras enormes e dentes afiados.");//Adicionar nome lobo
+				"Lá dentro, "+ lobo.getNomeLobo() +" parece assustado e tenta atacá-los com suas garras enormes e dentes afiados.");
 		
-		System.out.println("Ao chegar no esconderijo, ambos se preparam para atacar e entram em uma caverna escura e úmida, onde ... supostamente estaria. Lá dentro, ... parece assustado e tenta atacá-los com suas garras enormes e dentes afiados. Você e ... lutam com tudo o que tem e vencem a batalha!!!");//Adicionar nome companheiro e nome lobo
-		System.out.println("Sem ... protegendo a caverna, não demorou muito para que vocês encontrassem as gravuras, que diziam que a lâmina estava dentro de um grande castelo localizado no topo da maior colina em todo o reino, que ficava a alguns dias de distância.");//Adicionar nome lobo
+		System.out.println("Ao chegar no esconderijo, ambos se preparam para atacar e entram em uma caverna escura e úmida, onde "+ lobo.getNomeLobo() +" supostamente estaria. Lá dentro, "+companheiro.getNomeCompanheiro()+" parece assustado e tenta atacá-los com suas garras enormes e dentes afiados. Você e ... lutam com tudo o que tem e vencem a batalha!!!");
+		System.out.println("Sem "+ lobo.getNomeLobo() +" protegendo a caverna, não demorou muito para que vocês encontrassem as gravuras, que diziam que a lâmina estava dentro de um grande castelo localizado no topo da maior colina em todo o reino, que ficava a alguns dias de distância.");
 		System.out.println("Determinados a completar a missão, vocês deixam a caverna e continuam a jornada em direção à colina.");
 		
 		System.out.println("Como vocês vão até lá?");
@@ -207,14 +207,14 @@ public class Sla {
 			System.out.println("Vocês chegam sem nenhum problema.");
 			break;
 		default:
-			System.out.println("Escolha inválida. Você nunca chega até ... . (VOCÊ MORRE)");//Adicionar nome lobo
+			System.out.println("Escolha inválida. Você nunca chega até "+ lobo.getNomeLobo() +". (VOCÊ MORRE)");
 			return;
 		}
 		
-		System.out.println("Após 4 dias a canoa, você e ... chegam em seu destino final.");//Adicionar nome companheiro
+		System.out.println("Após 4 dias a canoa, você e "+ companheiro.getNomeCompanheiro() +"chegam em seu destino final.");
 		System.out.println(
-				"No topo, avistam um grande castelo antigo, rodeado por guardas, criaturas chamadas de ... que protegem o castelo e guardam a lâmina."); //Adicionar nome criaturas
-		System.out.println("... quer entrar atacando, já você prefere uma abordagem mais sutil.");//Adicionar nome companheiro 
+				"No topo, avistam um grande castelo antigo, rodeado por guardas, criaturas chamadas de "+ criatura.getNomeCriatura() +" que protegem o castelo e guardam a lâmina."); 
+		System.out.println(""+ companheiro.getNomeCompanheiro() +"quer entrar atacando, já você prefere uma abordagem mais sutil.");
 		System.out.println("Como vocês invadem o castelo?");
 		System.out.println("1 - Atacando");
 		System.out.println("2 - De forma sutil");
@@ -223,7 +223,7 @@ public class Sla {
 
 		switch (abordagemCastelo) {
 		case 1:
-			System.out.println("Os ... são muitos para você e ... . (VOCÊ MORRE)");
+			System.out.println("As "+ criatura.getNomeCriatura() +" são muitos para você e ... . (VOCÊ MORRE)");
 			return;
 		case 2:
 			System.out.println(
@@ -236,7 +236,7 @@ public class Sla {
 			System.out.println("Vocês saem do castelo o mais rápido que puder, sem olhar para trás.");
 
 			System.out.println(
-					"O feixes de luz que a lâmina solta atraem a atenção de dois ..., obrigados vocês a lutar.");
+					"O feixes de luz que a lâmina solta atraem a atenção de duas "+ criatura.getNomeCriatura() +", obrigados vocês a lutar.");
 			System.out.println("Que arma você usa para lutar?");
 			System.out.println("1 - Espada");
 			System.out.println("2 - Arco e flecha");
@@ -245,7 +245,7 @@ public class Sla {
 
 			switch (armaEscolhida) {
 			case 1:
-				System.out.println("Os ... são derrotados sem muito esforço e vocês saem do castelo em segurança.");
+				System.out.println("As "+ criatura.getNomeCriatura() +" são derrotados sem muito esforço e vocês saem do castelo em segurança.");
 				break;
 			case 2:
 				System.out.println(
