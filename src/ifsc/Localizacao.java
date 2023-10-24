@@ -1,6 +1,6 @@
 package ifsc;
 
-public class Localização {
+public class Localizacao {
 
 	private String local;
 
