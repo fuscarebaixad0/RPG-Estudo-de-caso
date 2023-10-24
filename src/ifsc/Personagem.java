@@ -5,18 +5,12 @@ public class Personagem {
 	private String nome;
 
 	int vida = 100;
-	int dano = vida - 10;
+	int dano = vida - 20;
 
-	private String morte;
+	public void morte() {
+		System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
+	}
 	
-	public String getMorte() {
-		return morte;
-	}
-
-	public void setMorte(String morte) {
-		this.morte = morte;
-	}
-
 	public String getNome() {
 		return nome;
 	}

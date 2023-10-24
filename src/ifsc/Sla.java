@@ -13,9 +13,7 @@ public class Sla {
 		nome = scanner.nextLine();
 		personagem.setNome(nome);
 
-		System.out.println("Olá, " + personagem.getNome() + "! Você está com a vida cheia!");
-		
-		System.out.println("Você encontrará alguns inimigos pelo caminho, ecolha o nome deles agora.");
+		System.out.println("Olá, " + personagem.getNome() + "! Você encontrará alguns inimigos pelo caminho, ecolha o nome deles agora.");
 		System.out.println("Um dos primeiros inimigos que você enfrentará é um temido lobo, com garras e dentes enorme...");
 	
 		String nomeLobo;
@@ -67,8 +65,8 @@ public class Sla {
 
 			switch (escolha) {
 			case 1:
-				System.out.println("Você morreu de exaustão e por falta de suprimentos.");
-				
+				System.out.println("Você ficou exausto e não tinha muitos suprimentos.");
+				personagem.morte();
 				return;
 			case 2:
 			case 3:
@@ -83,7 +81,7 @@ public class Sla {
 		}
 
 		System.out.println(
-				"Você chegou no reino de Eldor e está perdido. Você aborda um habitante para perguntar sobre a Lãmina Eldir.");
+				"Você chegou no reino de Eldor mas está perdido. Você aborda um habitante para perguntar sobre a Lãmina Eldir.");
 		int abordagem;
 
 		while (true) {
@@ -95,8 +93,8 @@ public class Sla {
 			switch (abordagem) {
 			case 1:
 				System.out.println("Ele se assuta, bate em você e depois te ajuda."); 
-				int dano= vida-10;
-				System.out.println("Você tomou 10 de dano!");
+				int dano= vida-20;
+				System.out.println("Você tomou 20 de dano!");
 				System.out.println("Vida ="+ dano);
 				break;
 			case 2:
@@ -124,7 +122,7 @@ public class Sla {
 			case 1:
 				System.out.println(
 						"Você foi para o esconderijo de" + lobo.getNomeLobo() +" sozinho e foi derrotado pelo animal.");
-				String morte;
+				personagem.morte();
 				return;
 			case 2:
 				System.out.println("Você foi para a Taverna e lá conheceu um viking chamado ... .");//Adicionar nome companheiro
@@ -150,7 +148,8 @@ public class Sla {
 				System.out.println("... aceita seu pedido e vocês seguem viagem até o esconderijo de ... ."); //Adicionar nome companheiro e nome lobo
 				break;
 			case 2:
-				System.out.println("... recusa seu pedido e você decide derrotar ... sozinho. (VOCÊ MORRE)");//Adicionar nome companheiro e nome lobo
+				System.out.println("... recusa seu pedido e você decide derrotar ... sozinho.");//Adicionar nome companheiro e nome lobo
+				personagem.morte();
 				return;
 			default:
 				System.out.println("Opção inválida. Escolha novamente.");
@@ -168,16 +167,15 @@ public class Sla {
 
 		switch (escolhaTransporteCaverna) {
 		case 1:
-			System.out.println("Vocês morrem de exaustão e por falta de suprimentos. (VOCÊ MORRE)");//Mudar morte
+			System.out.println("Vocês ficam exaustos e não tem muitos suprimentos");
+			personagem.morte();
 			return;
 		case 2:
-			System.out.println("Vocês chgam sem nenhum problema. (VOCÊ MORRE)");
-			return;
 		case 3:
 			System.out.println("Vocês chegam sem nenhum problema.");
 			break;
 		default:
-			System.out.println("Escolha inválida. Você nunca chega até ... . (VOCÊ MORRE)");//Adicionar nome lobo
+			System.out.println("Escolha inválida. Tente novamente");//Adicionar nome lobo
 			return;
 		}
 		System.out.println(
@@ -198,16 +196,18 @@ public class Sla {
 
 		switch (escolhaTransporteColina) {
 		case 1:
-			System.out.println("Vocês morrem de exaustão e por falta de suprimentos. (VOCÊ MORRE)");
+			System.out.println("Vocês morrem de exaustão e por falta de suprimentos.");
+			personagem.morte();
 			return;
 		case 2:
-			System.out.println("A carruagem cai de uma montanha alta e estreita. (VOCÊ MORRE)");
+			System.out.println("A carruagem cai de uma montanha alta e estreita.");
+			personagem.morte();
 			return;
 		case 3:
 			System.out.println("Vocês chegam sem nenhum problema.");
 			break;
 		default:
-			System.out.println("Escolha inválida. Você nunca chega até ... . (VOCÊ MORRE)");//Adicionar nome lobo
+			System.out.println("Escolha inválida. Tente novamente.");
 			return;
 		}
 		
@@ -223,7 +223,8 @@ public class Sla {
 
 		switch (abordagemCastelo) {
 		case 1:
-			System.out.println("Os ... são muitos para você e ... . (VOCÊ MORRE)");
+			System.out.println("Os ... são muitos para você e ... .");
+			personagem.morte();
 			return;
 		case 2:
 			System.out.println(
@@ -249,10 +250,11 @@ public class Sla {
 				break;
 			case 2:
 				System.out.println(
-						"As flechas não são fortes o suficiente para atravessar a pele dos inimigos. (VOCÊ MORRE)");
+						"As flechas não são fortes o suficiente para atravessar a pele dos inimigos.");
+				personagem.morte();
 				return;
 			default:
-				System.out.println("Escolha inválida. Você é derrotado pelos ... . (VOCÊ MORRE)");
+				System.out.println("Escolha inválida. Tente novamente.");
 				return;
 			}
 			//Adicionar final
