@@ -13,7 +13,40 @@ public class Sla {
 		personagem.setNome(nome);
 
 		System.out.println("Olá, " + personagem.getNome() + "! Você está com a vida cheia!");
+		
+		System.out.println("Você encontrará alguns inimigos pelo caminho, ecolha o nome deles agora.");
+		System.out.println("Um dos primeiros inimigos que você enfrentará é um temido lobo, com garras e dentes enorme...");
+	
+		String nomeLobo;
 
+		Lobo lobo = new Lobo();
+		System.out.println("Escolha o nome do lobo:");
+		nomeLobo = scanner.nextLine();
+		lobo.setNomeLobo(nomeLobo);
+		System.out.println(
+				"O terrivel lobo " + lobo.getNomeLobo() + " te aguarda!!!");
+		
+		System.out.println("O segundo inimigo a cruzar seu caminho é uma horrenda critura, com escamas grossas e um corpo desfigurado...");
+		
+		String nomeCriatura;
+
+		Criatura criatura = new Criatura();
+		System.out.println("Escolha o nome da criatura:");
+		nomeCriatura = scanner.nextLine();
+		criatura.setNomeCriatura(nomeCriatura);
+		System.out.println(
+				"O temivel criatura " + criatura.getNomeCriatura() + " te aguarda!!!");
+		
+		System.out.println("Além desses inimigos, você tambem encontrará amigos. Um personagem em especifico te acompanhará em muitas aventuras no futuro");
+		
+		String nomeCompanheiro;
+
+		Companheiro companheiro = new Companheiro();
+		System.out.println("Escolha o nome do seu companheiro:");
+		nomeCompanheiro = scanner.nextLine();
+		companheiro.setNomeCompanheiro(nomeCompanheiro);
+		System.out.println("Seu companheiro "+ companheiro.getNomeCompanheiro() + " te aguarda!!!");
+		
 		String local;
 
 		Localização localização = new Localização();
@@ -59,7 +92,7 @@ public class Sla {
 
 			switch (abordagem) {
 			case 1:
-				System.out.println("Ele se assuta, bate em você e depois te ajuda."); // Adicionar dano
+				System.out.println("Ele se assuta, bate em você e depois te ajuda."); 
 				break;
 			case 2:
 				System.out.println("Ele te ajuda normalmente.");
@@ -73,12 +106,12 @@ public class Sla {
 		}
 
 		System.out.println(
-				"O habitante te deu informações sobre a lâmina Eldir e você segue rumo a um vilarejo ao norte do reino chamado Trakai. Lá, você encontra uma placa com 2 destinos e precisa decidir para onde vai primeiro.");
-
+				"O habitante te deu informações sobre a lâmina Eldir e você segue rumo a um vilarejo ao norte do reino chamado Trakai. Lá, você encontra uma placa com 2 destinos, Um deles é o esconderijo de um lobo e o outro uma Taverna conhecida por ser muito perigosa.");
+		
 		int destino;
 		while (true) {
 			System.out.println("Para onde você vai primeiro?");
-			System.out.println("1 - Esconderijo do lobo ..."); //Adicionar nome lobo
+			System.out.println("1 - Esconderijo do lobo " + lobo.getNomeLobo() + "."); 
 			System.out.println("2 - Taverna dos Reclusos");
 			destino = scanner.nextInt();
 
