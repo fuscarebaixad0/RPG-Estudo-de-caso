@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Sla {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
+		int vida=100;
 		String nome;
 
 		Personagem personagem = new Personagem();
@@ -67,6 +68,7 @@ public class Sla {
 			switch (escolha) {
 			case 1:
 				System.out.println("Você morreu de exaustão e por falta de suprimentos.");
+				
 				return;
 			case 2:
 			case 3:
@@ -93,6 +95,9 @@ public class Sla {
 			switch (abordagem) {
 			case 1:
 				System.out.println("Ele se assuta, bate em você e depois te ajuda."); 
+				int dano= vida-10;
+				System.out.println("Você tomou 10 de dano!");
+				System.out.println("Vida ="+ dano);
 				break;
 			case 2:
 				System.out.println("Ele te ajuda normalmente.");
@@ -118,7 +123,8 @@ public class Sla {
 			switch (destino) {
 			case 1:
 				System.out.println(
-						"Você foi para o esconderijo de ... sozinho e foi derrotado pelo animal. (VOCÊ MORRE)"); //Adicionar nome lobo
+						"Você foi para o esconderijo de" + lobo.getNomeLobo() +" sozinho e foi derrotado pelo animal.");
+				String morte;
 				return;
 			case 2:
 				System.out.println("Você foi para a Taverna e lá conheceu um viking chamado ... .");//Adicionar nome companheiro
