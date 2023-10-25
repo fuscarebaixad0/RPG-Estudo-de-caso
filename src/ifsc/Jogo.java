@@ -16,7 +16,7 @@ public class Jogo {
 	private static ArrayList<Companheiro> ajudar = new ArrayList<>();
 	private static ArrayList<Interacao> abordar = new ArrayList<>();
 	private static ArrayList<Personagem> escolher = new ArrayList<>();
-	private static ArrayList<Personagem> inventarioArmas = new ArrayList<>();
+	private static ArrayList<Arma> inventario = new ArrayList<>();
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
@@ -71,9 +71,87 @@ public class Jogo {
 		companheiro.setNome(nomeCompanheiro);
 		System.out.println("Seu companheiro " + companheiro.getNome() + " te aguarda!!!");
 
+		Inventario inventario = new Inventario();
+		int choice = Integer.MAX_VALUE;
+		while (choice != 5) {
+			System.out.println("\nMenu:");
+			System.out.println("1. Adicionar arma");
+			System.out.println("2. Editar arma");
+			System.out.println("3. Excluir arma");
+			System.out.println("4. Visualizar armas");
+			System.out.println("5. Encerrar programa");
+			System.out.print("Escolha uma opção: ");
+
+			choice = scanner.nextInt();
+			scanner.nextLine();
+
+			switch (choice) {
+			case 1:
+				System.out.print("Nome: ");
+				String nomeArma = scanner.nextLine();
+				System.out.print("Modelo: ");
+				String modeloArma = scanner.nextLine();
+				System.out.print("Tamanho: ");
+				String tamanhoArma = scanner.nextLine();
+				System.out.print("Força: ");
+				String forcaArma = scanner.nextLine();
+
+				Arma novaArma = new Arma(nomeArma, modeloArma, tamanhoArma, forcaArma);
+				inventario.adicionarArma(novaArma);
+				break;
+
+			case 2:
+				inventario.visualizarArma();
+				System.out.print("Digite o número da arma que deseja editar: ");
+				int indiceEditar = scanner.nextInt();
+				scanner.nextLine();
+
+				System.out.print("Alterar nome: ");
+				nomeArma = scanner.nextLine();
+				System.out.print("Alterar modelo: ");
+				modeloArma = scanner.nextLine();
+				System.out.print("Alterar tamanho: ");
+				tamanhoArma = scanner.nextLine();
+				System.out.print("Alterar força: ");
+				forcaArma = scanner.nextLine();
+
+				novaArma = new Arma(nomeArma, modeloArma, tamanhoArma, forcaArma);
+				inventario.editarArma(indiceEditar - 1, novaArma);
+				break;
+
+			case 3:
+				inventario.visualizarArma();
+				System.out.print("Digite o número da arma que deseja excluir: ");
+				int indiceExcluir = scanner.nextInt();
+				scanner.nextLine();
+
+				inventario.excluirArma(indiceExcluir - 1);
+				break;
+
+			case 4:
+				inventario.visualizarArma();
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				break;
+
+			case 5:
+				System.out.println("Encerrando o programa.");
+				scanner.close();
+				System.exit(0);
+
+			default:
+				System.out.println("Opção inválida! Tente novamente.");
+				break;
+			}
+		}
+
 		String local;
 
 		Localizacao localização = new Localizacao();
+
 		System.out.println("Onde você está?");
 		for (Localizacao loc : localizacoesMapa) {
 			System.out.println(loc.getLocal());
@@ -83,9 +161,10 @@ public class Jogo {
 
 		System.out.println(
 				"Você está em " + localização.getLocal() + " e precisa escolher como ir até o reino de Eldor.");
-		int escolha;
 
-		while (true) {
+		int escolha = Integer.MAX_VALUE;
+
+		while (escolha != 2) {
 			System.out.println("Escolha uma forma de ir até o reino de Eldor:");
 			for (Transporte trans : transportes) {
 				System.out.println(trans.getMeioTransporte());
@@ -97,10 +176,10 @@ public class Jogo {
 				personagem.morte();
 				return;
 			} else if (escolha == 2 || escolha == 3) {
-				personagem.chegou();
+				Personagem.chegou();
 
 			} else {
-				personagem.opinv();
+				Personagem.opinv();
 				return;
 			}
 			break;
@@ -126,14 +205,14 @@ public class Jogo {
 			} else if (abordagem == 2) {
 				System.out.println("Ele te ajuda normalmente.");
 			} else {
-				personagem.opinv();
+				Personagem.opinv();
 				return;
 			}
 			break;
 		}
 
 		System.out.println(
-				"O habitante te deu informações sobre a lâmina Eldir e você segue rumo a um vilarejo ao norte do reino chamado Trakai. Lá, você encontra uma placa com 2 destinos, Um deles é o esconderijo de um lobo e o outro uma Taverna conhecida por ser muito perigosa.");
+				"O habitante te deu informações sobre a lâmina Eldir e você segue rumo a um vilarejo ao norte do reino chamado Trakai. Lá, você encontra uma placa com 2 destinos e precisa decidir para onde ir.");
 
 		int destino;
 		while (true) {
@@ -145,24 +224,24 @@ public class Jogo {
 
 			if (destino == 1) {
 				System.out.println(
-						"Você foi para o esconderijo de" + lobo.getNome() + " sozinho e foi derrotado pelo animal.");
+						"Você foi para o esconderijo de " + lobo.getNome() + " sozinho e foi derrotado pelo animal.");
 				personagem.morte();
 				return;
 			} else if (destino == 2) {
 				System.out.println(
-						"Você foi para a Taverna e lá conheceu um viking chamado " + companheiro.getNome() + " ");
+						"Você foi para a Taverna e lá conheceu um viking chamado " + companheiro.getNome() + ".");
 			} else {
-				personagem.opinv();
+				Personagem.opinv();
 				return;
 			}
 
 			break;
 		}
 
-		int pedidoAjuda;
-		System.out.println("Você foi para a Taverna e lá conheceu um homem alto e ameaçador, um viking chamado "
-				+ companheiro.getNome()
-				+ "que te diz ter ouvido boatos sobre o paradeiro da lâmina eldir. Ele afirma ter ouvido habitantes discutindo sobre o esconderijo do temido lobo "
+		int pedidoAjuda=Integer.MAX_VALUE;
+		
+		System.out.println("" + companheiro.getNome()
+				+ " e diz ter ouvido boatos sobre o paradeiro da lâmina eldir. Ele afirma ter ouvido habitantes discutindo sobre o esconderijo do temido lobo "
 				+ lobo.getNome()
 				+ ", local onde existem supostas gravuras rupestres indicando o paradeiro da lâmina. Sabendo para onde ir, você o convida para ir com você.");
 		while (true) {
@@ -174,14 +253,14 @@ public class Jogo {
 
 			if (pedidoAjuda == 1) {
 				System.out.println("" + companheiro.getNome()
-						+ " aceita seu pedido e vocês seguem viagem até o esconderijo de ... .");
+						+ " aceita seu pedido e vocês seguem viagem até o esconderijo de " + lobo.getNome() + ".");
 			} else if (pedidoAjuda == 2) {
 				System.out.println("" + companheiro.getNome() + " recusa seu pedido e você decide derrotar "
-						+ lobo.getNome() + "sozinho.");
+						+ lobo.getNome() + " sozinho.");
 				personagem.morte();
 				return;
 			} else {
-				personagem.opinv();
+				Personagem.opinv();
 				return;
 			}
 			break;
@@ -199,10 +278,10 @@ public class Jogo {
 				personagem.morte();
 				return;
 			} else if (escolhaTransporteCaverna == 2 || escolhaTransporteCaverna == 3) {
-				personagem.chegou();
+				Personagem.chegou();
 
 			} else {
-				personagem.opinv();
+				Personagem.opinv();
 				return;
 			}
 			break;
@@ -235,9 +314,9 @@ public class Jogo {
 				personagem.morte();
 				return;
 			} else if (escolhaTransporteColina == 3) {
-				personagem.chegou();
+				Personagem.chegou();
 			} else {
-				personagem.opinv();
+				Personagem.opinv();
 				return;
 			}
 			break;
@@ -291,7 +370,7 @@ public class Jogo {
 				personagem.morte();
 				return;
 			} else {
-				personagem.opinv();
+				Personagem.opinv();
 				return;
 			}
 			break;
@@ -392,6 +471,39 @@ public class Jogo {
 		escolher.add(ea2);
 
 	}
-	
-}
 
+	public static void adicionarArma(Arma arma) {
+		inventario.add(arma);
+		System.out.println("Nova arma cadastrada!");
+	}
+
+	public void editarArma(int indice, Arma novaArma) {
+		if (indice >= 0 && indice < inventario.size()) {
+			inventario.set(indice, novaArma);
+			System.out.println("Arma editada!");
+		} else {
+			System.out.println("Índice inválido.");
+		}
+	}
+
+	public void excluirArma(int indice) {
+		if (indice >= 0 && indice < inventario.size()) {
+			inventario.remove(indice);
+			System.out.println("Arma excluída!");
+		} else {
+			System.out.println("Índice inválido.");
+		}
+	}
+
+	public void visualizarArma() {
+		if (inventario.isEmpty()) {
+			System.out.println("Seu inventário está vazio.");
+		} else {
+			for (int i = 0; i < inventario.size(); i++) {
+				System.out.println("Arma #" + (i + 1) + ":\n" + inventario.get(i));
+
+			}
+		}
+	}
+
+}
