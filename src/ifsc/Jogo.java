@@ -71,15 +71,52 @@ public class Jogo {
 		companheiro.setNome(nomeCompanheiro);
 		System.out.println("Seu companheiro " + companheiro.getNome() + " te aguarda!!!");
 
+		String local;
+
+		Localizacao localização = new Localizacao();
+
+		System.out.println("Onde você está?");
+		for (Localizacao loc : localizacoesMapa) {
+			System.out.println(loc.getLocal());
+		}
+		local = scanner.nextLine();
+		localização.setLocal(local);
+
+		System.out.println(
+				"Você está em " + localização.getLocal() + " e precisa escolher como ir até o reino de Eldor.");
+
+		int escolha = Integer.MAX_VALUE;
+
+		while (escolha != 2) {
+			System.out.println("Escolha uma forma de ir até o reino de Eldor:");
+			for (Transporte trans : transportes) {
+				System.out.println(trans.getMeioTransporte());
+			}
+			escolha = scanner.nextInt();
+
+			if (escolha == 1) {
+				personagem.exausto();
+				personagem.morte();
+				return;
+			} else if (escolha == 2 || escolha == 3) {
+				Personagem.chegou();
+
+			} else {
+				Personagem.opinv();
+				return;
+			}
+			break;
+		}
+		System.out.println("Ao chegar, você decide abir seu inventário.");
+		int choice = 0;
 		Inventario inventario = new Inventario();
-		int choice = Integer.MAX_VALUE;
 		while (choice != 5) {
 			System.out.println("\nMenu:");
 			System.out.println("1. Adicionar arma");
 			System.out.println("2. Editar arma");
 			System.out.println("3. Excluir arma");
 			System.out.println("4. Visualizar armas");
-			System.out.println("5. Encerrar programa");
+			System.out.println("5. Sair do inventário e continuar o jogo");
 			System.out.print("Escolha uma opção: ");
 
 			choice = scanner.nextInt();
@@ -135,54 +172,14 @@ public class Jogo {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				break;
-
 			case 5:
-				System.out.println("Encerrando o programa.");
-				scanner.close();
-				System.exit(0);
+				Personagem.chegou();
+				break;
 
 			default:
 				System.out.println("Opção inválida! Tente novamente.");
 				break;
 			}
-		}
-
-		String local;
-
-		Localizacao localização = new Localizacao();
-
-		System.out.println("Onde você está?");
-		for (Localizacao loc : localizacoesMapa) {
-			System.out.println(loc.getLocal());
-		}
-		local = scanner.nextLine();
-		localização.setLocal(local);
-
-		System.out.println(
-				"Você está em " + localização.getLocal() + " e precisa escolher como ir até o reino de Eldor.");
-
-		int escolha = Integer.MAX_VALUE;
-
-		while (escolha != 2) {
-			System.out.println("Escolha uma forma de ir até o reino de Eldor:");
-			for (Transporte trans : transportes) {
-				System.out.println(trans.getMeioTransporte());
-			}
-			escolha = scanner.nextInt();
-
-			if (escolha == 1) {
-				personagem.exausto();
-				personagem.morte();
-				return;
-			} else if (escolha == 2 || escolha == 3) {
-				Personagem.chegou();
-
-			} else {
-				Personagem.opinv();
-				return;
-			}
-			break;
 		}
 
 		System.out.println(
@@ -375,7 +372,7 @@ public class Jogo {
 			}
 			break;
 		}
-		// Adicionar final
+	System.out.println("Após enfrentarem uma sucessão de desafios mortais, vocês retornam ao reino de Eldor, cavalgando em seus majestosos cavalos e trazendo consigo a magnífica lâmina de Eldir.");
 		System.out.println(
 				"Depois de tantos anos, a Lâmina Eldir foi recuperada, trazendo luz e paz de volta ao reino de Eldor.");
 		System.out.println("FIM DO JOGO");
