@@ -5,9 +5,16 @@ public class Personagem {
 	private String nome;
 	private Transporte meioTransporte;
 	private String escolhaArma;
+	private String arma;
+	public String getArma() {
+		return arma;
+	}
+
+	public void setArma(String arma) {
+		this.arma = arma;
+	}
 
 	int vida = 100;
-
 
 	public String getEscolhaArma() {
 		return escolhaArma;
@@ -46,7 +53,7 @@ public class Personagem {
 	public void morte() {
 		System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 	}
-	
+
 	public void exausto() {
 		System.out.println("Você ficou exausto e não tinha muitos suprimentos.");
 	}
@@ -58,7 +65,7 @@ public class Personagem {
 	public static void opinv() {
 		System.out.println("Opção inválida. Escolha novamente.");
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}

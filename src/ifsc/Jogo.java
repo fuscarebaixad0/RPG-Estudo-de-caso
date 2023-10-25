@@ -16,6 +16,7 @@ public class Jogo {
 	private static ArrayList<Companheiro> ajudar = new ArrayList<>();
 	private static ArrayList<Interacao> abordar = new ArrayList<>();
 	private static ArrayList<Personagem> escolher = new ArrayList<>();
+	private static ArrayList<Personagem> inventarioArmas = new ArrayList<>();
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
@@ -29,7 +30,7 @@ public class Jogo {
 		criarAjuda();
 		criarAbordagem();
 		criarEscolha();
-		
+
 		Personagem personagem = new Personagem();
 		System.out.println("Digite o nome do seu personagem:");
 		nome = scanner.nextLine();
@@ -91,20 +92,17 @@ public class Jogo {
 			}
 			escolha = scanner.nextInt();
 
-			switch (escolha) {
-			case 1:
+			if (escolha == 1) {
 				personagem.exausto();
 				personagem.morte();
 				return;
-			case 2:
-			case 3:
+			} else if (escolha == 2 || escolha == 3) {
 				personagem.chegou();
-				break;
-			default:
-				personagem.opinv();
-				continue;
-			}
 
+			} else {
+				personagem.opinv();
+				return;
+			}
 			break;
 		}
 
@@ -119,21 +117,18 @@ public class Jogo {
 			}
 			abordagem = scanner.nextInt();
 
-			switch (abordagem) {
-			case 1:
+			if (abordagem == 1) {
 				System.out.println("Ele se assuta, bate em você e depois te ajuda.");
 				int dano = vida - 20;
 				System.out.println("Você tomou 20 de dano!");
-				System.out.println("Vida =" + dano);
+				System.out.println("Vida = " + dano);
 				break;
-			case 2:
+			} else if (abordagem == 2) {
 				System.out.println("Ele te ajuda normalmente.");
-				break;
-			default:
-				System.out.println("Opção inválida. Escolha novamente.");
-				continue;
+			} else {
+				personagem.opinv();
+				return;
 			}
-
 			break;
 		}
 
@@ -148,19 +143,17 @@ public class Jogo {
 			}
 			destino = scanner.nextInt();
 
-			switch (destino) {
-			case 1:
+			if (destino == 1) {
 				System.out.println(
 						"Você foi para o esconderijo de" + lobo.getNome() + " sozinho e foi derrotado pelo animal.");
 				personagem.morte();
 				return;
-			case 2:
+			} else if (destino == 2) {
 				System.out.println(
 						"Você foi para a Taverna e lá conheceu um viking chamado " + companheiro.getNome() + " ");
-				break;
-			default:
-				System.out.println("Opção inválida. Escolha novamente.");
-				continue;
+			} else {
+				personagem.opinv();
+				return;
 			}
 
 			break;
@@ -179,108 +172,110 @@ public class Jogo {
 			}
 			pedidoAjuda = scanner.nextInt();
 
-			switch (pedidoAjuda) {
-			case 1:
+			if (pedidoAjuda == 1) {
 				System.out.println("" + companheiro.getNome()
 						+ " aceita seu pedido e vocês seguem viagem até o esconderijo de ... .");
-				break;
-			case 2:
-				System.out.println("" + companheiro.getNome()
-						+ " recusa seu pedido e você decide derrotar ... sozinho. (VOCÊ MORRE)");
+			} else if (pedidoAjuda == 2) {
+				System.out.println("" + companheiro.getNome() + " recusa seu pedido e você decide derrotar "
+						+ lobo.getNome() + "sozinho.");
+				personagem.morte();
 				return;
-			default:
-				System.out.println("Opção inválida. Escolha novamente.");
-				continue;
+			} else {
+				personagem.opinv();
+				return;
+			}
+			break;
+		}
+		while (true) {
+			System.out.println("Como vocês vão até lá?");
+			for (Transporte trans : transportes) {
+				System.out.println(trans.getMeioTransporte());
 			}
 
+			int escolhaTransporteCaverna = scanner.nextInt();
+
+			if (escolhaTransporteCaverna == 1) {
+				personagem.exausto();
+				personagem.morte();
+				return;
+			} else if (escolhaTransporteCaverna == 2 || escolhaTransporteCaverna == 3) {
+				personagem.chegou();
+
+			} else {
+				personagem.opinv();
+				return;
+			}
 			break;
 		}
-		System.out.println("Como vocês vão até lá?");
-		for (Transporte trans : transportes) {
-			System.out.println(trans.getMeioTransporte());
-		}
 
-		int escolhaTransporteCaverna = scanner.nextInt();
-
-		switch (escolhaTransporteCaverna) {
-		case 1:
-			personagem.exausto();
-			personagem.morte();
-			return;
-		case 2:
-		case 3:
-			personagem.chegou();
-			break;
-		default:
-			System.out.println("Escolha inválida. Tente novamente.");
-			return;
-		}
 		System.out.println("Ao chegar no esconderijo de " + lobo.getNome() + ", você e " + companheiro.getNome()
 				+ " se preparam para atacar e entram em uma caverna escura e úmida.");
-		System.out.println("Lá dentro, " + lobo.getNome()
-				+ " parece assustado e tenta atacá-los com suas garras enormes e dentes afiados.");
+		System.out.println("Lá dentro, " + lobo.getNome() + " parece assustado e ataca.");
 
-		System.out.println(
-				"Ao chegar no esconderijo, ambos se preparam para atacar e entram em uma caverna escura e úmida, onde "
-						+ lobo.getNome() + " supostamente estaria. Lá dentro, " + companheiro.getNome()
-						+ " parece assustado e tenta atacá-los com suas garras enormes e dentes afiados. Você e ... lutam com tudo o que tem e vencem a batalha!!!");
+		System.out.println(" Você e " + companheiro.getNome() + " lutam com tudo o que tem e vencem a batalha!!!");
 		System.out.println("Sem " + lobo.getNome()
 				+ " protegendo a caverna, não demorou muito para que vocês encontrassem as gravuras, que diziam que a lâmina estava dentro de um grande castelo localizado no topo da maior colina em todo o reino, que ficava a alguns dias de distância.");
 		System.out.println(
 				"Determinados a completar a missão, vocês deixam a caverna e continuam a jornada em direção à colina.");
 
-		System.out.println("Como vocês vão até lá?");
-		for (Transporte trans : transportes) {
-			System.out.println(trans.getMeioTransporte());
-		}
+		while (true) {
+			System.out.println("Como vocês vão até lá?");
+			for (Transporte trans : transportes) {
+				System.out.println(trans.getMeioTransporte());
+			}
 
-		int escolhaTransporteColina = scanner.nextInt();
+			int escolhaTransporteColina = scanner.nextInt();
 
-		switch (escolhaTransporteColina) {
-		case 1:
-			System.out.println("Vocês morrem de exaustão e por falta de suprimentos.");
-			personagem.morte();
-			return;
-		case 2:
-			System.out.println("A carruagem cai de uma montanha alta e estreita.");
-			personagem.morte();
-			return;
-		case 3:
-			System.out.println("Vocês chegam sem nenhum problema.");
+			if (escolhaTransporteColina == 1) {
+				personagem.exausto();
+				personagem.morte();
+				return;
+			} else if (escolhaTransporteColina == 2) {
+				System.out.println("A carruagem cai de uma montanha alta e estreita.");
+				personagem.morte();
+				return;
+			} else if (escolhaTransporteColina == 3) {
+				personagem.chegou();
+			} else {
+				personagem.opinv();
+				return;
+			}
 			break;
-		default:
-			System.out.println("Escolha inválida. Tente novamente.");
-			return;
 		}
 
-		System.out.println("Após 4 dias a canoa, você e " + companheiro.getNome() + "chegam em seu destino final.");
+		System.out.println("Após 4 dias a cavalo, você e " + companheiro.getNome() + "chegam em seu destino final.");
 		System.out.println("No topo, avistam um grande castelo antigo, rodeado por guardas, criaturas chamadas de "
 				+ criatura.getNome() + " que protegem o castelo e guardam a lâmina.");
 		System.out.println(
 				"" + companheiro.getNome() + "quer entrar atacando, já você prefere uma abordagem mais sutil.");
-		System.out.println("Como vocês invadem o castelo?");
-		for (Interacao abr : abordar) {
-			System.out.println(abr.getAborda());
+
+		while (true) {
+			System.out.println("Como vocês invadem o castelo?");
+			for (Interacao abr : abordar) {
+				System.out.println(abr.getAborda());
+			}
+			int abordagemCastelo = scanner.nextInt();
+
+			if (abordagemCastelo == 1) {
+				System.out.println("As " + criatura.getNome() + " são muitas para você e. " + companheiro.getNome());
+				personagem.morte();
+				return;
+			} else if (abordagemCastelo == 2) {
+				System.out.println(
+						"Vocês decidem se infiltrar no castelo, evitando os olhares dos draugrs o máximo possível.");
+			}
+			break;
 		}
-		int abordagemCastelo = scanner.nextInt();
+		System.out
+				.println("À medida que avançam, encontram salas escuras e passagens secretas no interior do castelo.");
+		System.out.println(
+				"Após muitas horas de exploração, vocês chegam à câmara onde a lâmina mágica está guardada. Para sua surpesa a sala não tem guardas.");
+		System.out.println("A lâmina repousa em um pedestal de pedra, brilhando com uma aura de poder místico.");
+		System.out.println("Vocês a pegam com muito cuidado e saem do castelo o mais rápido que podem da câmara.");
 
-		switch (abordagemCastelo) {
-		case 1:
-			System.out.println("As " + criatura.getNome() + " são muitos para você e ... . (VOCÊ MORRE)");
-			personagem.morte();
-			return;
-		case 2:
-			System.out.println(
-					"Vocês decidem se infiltrar no castelo, evitando os olhares dos draugrs o máximo possível.");
-			System.out.println(
-					"À medida que avançam, encontram salas escuras e passagens secretas no interior do castelo. Muitas desses cômodos estavam trancados ou com maçanetas quebradas, então não foi possível explorar muito.");
-			System.out.println(
-					"Finalmente, após muitas horas de exploração, vocês chegam à câmara onde a lâmina mágica está guardada.");
-			System.out.println("Ela repousa em um pedestal de pedra, brilhando com uma aura de poder místico.");
-			System.out.println("Vocês saem do castelo o mais rápido que puder, sem olhar para trás.");
-
-			System.out.println("O feixes de luz que a lâmina solta atraem a atenção de duas " + criatura.getNome()
-					+ ", obrigados vocês a lutar.");
+		System.out.println("O feixes de luz que a lâmina emite atraem a atenção de duas " + criatura.getNome()
+				+ ", obrigando vocês a lutar.");
+		while (true) {
 			System.out.println("Que arma você usa para lutar?");
 			for (Personagem esa : escolher) {
 				System.out.println(esa.getEscolhaArma());
@@ -288,28 +283,23 @@ public class Jogo {
 
 			int armaEscolhida = scanner.nextInt();
 
-			switch (armaEscolhida) {
-			case 1:
+			if (armaEscolhida == 1) {
 				System.out.println("As " + criatura.getNome()
 						+ " são derrotados sem muito esforço e vocês saem do castelo em segurança.");
-				break;
-			case 2:
+			} else if (armaEscolhida == 2) {
 				System.out.println("As flechas não são fortes o suficiente para atravessar a pele dos inimigos.");
 				personagem.morte();
 				return;
-			default:
-				System.out.println("Escolha inválida. Tente novamente.");
+			} else {
+				personagem.opinv();
 				return;
 			}
-			// Adicionar final
-			System.out.println(
-					"Depois de tantos anos, a Lâmina Eldir foi recuperada, trazendo luz e paz de volta ao reino de Eldor.");
-			System.out.println("FIM DO JOGO");
 			break;
-		default:
-			System.out.println("Escolha inválida. Vocês são descobertos pelos draugrs. (VOCÊ MORRE)");
-			return;
 		}
+		// Adicionar final
+		System.out.println(
+				"Depois de tantos anos, a Lâmina Eldir foi recuperada, trazendo luz e paz de volta ao reino de Eldor.");
+		System.out.println("FIM DO JOGO");
 	}
 
 	public static void criarLocalizacoesMapa() {
@@ -354,7 +344,7 @@ public class Jogo {
 		interacoes.add(inter2);
 
 	}
-	
+
 	public static void criarIndo() {
 		Indo ir1 = new Indo();
 		ir1.setInd("1 - Esconderijo do lobo.");
@@ -366,7 +356,7 @@ public class Jogo {
 		deslocar.add(ir2);
 
 	}
-	
+
 	public static void criarAjuda() {
 		Companheiro aj1 = new Companheiro();
 		aj1.setHelp("1 - Oferecendo dinheiro.");
@@ -378,27 +368,30 @@ public class Jogo {
 		ajudar.add(aj2);
 
 	}
-	
+
 	public static void criarAbordagem() {
 		Interacao ab1 = new Interacao();
-		ab1.setAborda("1 - Oferecendo dinheiro.");
+		ab1.setAborda("1 - Atacando.");
 
 		Interacao ab2 = new Interacao();
-		ab2.setAborda("2 - Implorando.");
+		ab2.setAborda("2 - Escondidos.");
 
 		abordar.add(ab1);
 		abordar.add(ab2);
 
 	}
+
 	public static void criarEscolha() {
 		Personagem ea1 = new Personagem();
-		ea1.setEscolhaArma("1 - Oferecendo dinheiro.");
+		ea1.setEscolhaArma("1 - Golpe de Espada.");
 
 		Personagem ea2 = new Personagem();
-		ea2.setEscolhaArma("2 - Implorando.");
+		ea2.setEscolhaArma("2 - Arco e Flecha.");
 
 		escolher.add(ea1);
 		escolher.add(ea2);
 
 	}
+	
 }
+
