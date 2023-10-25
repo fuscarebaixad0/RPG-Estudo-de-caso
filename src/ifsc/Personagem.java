@@ -4,8 +4,19 @@ public class Personagem {
 
 	private String nome;
 	private Transporte meioTransporte;
+	private String escolhaArma;
 
 	int vida = 100;
+
+
+	public String getEscolhaArma() {
+		return escolhaArma;
+	}
+
+	public void setEscolhaArma(String escolhaArma) {
+		this.escolhaArma = escolhaArma;
+	}
+
 	int dano = vida - 20;
 
 	public Transporte getMeioTransporte() {

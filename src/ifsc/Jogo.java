@@ -11,6 +11,11 @@ public class Jogo {
 
 	private static ArrayList<Localizacao> localizacoesMapa = new ArrayList<>();
 	private static ArrayList<Transporte> transportes = new ArrayList<>();
+	private static ArrayList<Interacao> interacoes = new ArrayList<>();
+	private static ArrayList<Indo> deslocar = new ArrayList<>();
+	private static ArrayList<Companheiro> ajudar = new ArrayList<>();
+	private static ArrayList<Interacao> abordar = new ArrayList<>();
+	private static ArrayList<Personagem> escolher = new ArrayList<>();
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
@@ -19,7 +24,12 @@ public class Jogo {
 
 		criarLocalizacoesMapa();
 		criaTransportes();
-
+		criarInteracao();
+		criarIndo();
+		criarAjuda();
+		criarAbordagem();
+		criarEscolha();
+		
 		Personagem personagem = new Personagem();
 		System.out.println("Digite o nome do seu personagem:");
 		nome = scanner.nextLine();
@@ -63,10 +73,10 @@ public class Jogo {
 		String local;
 
 		Localizacao localização = new Localizacao();
+		System.out.println("Onde você está?");
 		for (Localizacao loc : localizacoesMapa) {
 			System.out.println(loc.getLocal());
 		}
-		System.out.println("Onde você está?");
 		local = scanner.nextLine();
 		localização.setLocal(local);
 
@@ -104,8 +114,9 @@ public class Jogo {
 
 		while (true) {
 			System.out.println("Como você aborda este habitante?");
-			System.out.println("1 - Cutucando");
-			System.out.println("2 - Chamando em voz alta");
+			for (Interacao inte : interacoes) {
+				System.out.println(inte.getIntera());
+			}
 			abordagem = scanner.nextInt();
 
 			switch (abordagem) {
@@ -132,8 +143,9 @@ public class Jogo {
 		int destino;
 		while (true) {
 			System.out.println("Para onde você vai primeiro?");
-			System.out.println("1 - Esconderijo do lobo " + lobo.getNome() + ".");
-			System.out.println("2 - Taverna dos Reclusos");
+			for (Indo ir : deslocar) {
+				System.out.println(ir.getInd());
+			}
 			destino = scanner.nextInt();
 
 			switch (destino) {
@@ -162,8 +174,9 @@ public class Jogo {
 				+ ", local onde existem supostas gravuras rupestres indicando o paradeiro da lâmina. Sabendo para onde ir, você o convida para ir com você.");
 		while (true) {
 			System.out.println("Como você pede ajuda a " + companheiro.getNome() + "?");
-			System.out.println("1 - Oferecendo dinheiro em troca");
-			System.out.println("2 - Implorando");
+			for (Companheiro ajd : ajudar) {
+				System.out.println(ajd.getHelp());
+			}
 			pedidoAjuda = scanner.nextInt();
 
 			switch (pedidoAjuda) {
@@ -246,9 +259,9 @@ public class Jogo {
 		System.out.println(
 				"" + companheiro.getNome() + "quer entrar atacando, já você prefere uma abordagem mais sutil.");
 		System.out.println("Como vocês invadem o castelo?");
-		System.out.println("1 - Atacando");
-		System.out.println("2 - De forma sutil");
-
+		for (Interacao abr : abordar) {
+			System.out.println(abr.getAborda());
+		}
 		int abordagemCastelo = scanner.nextInt();
 
 		switch (abordagemCastelo) {
@@ -269,8 +282,9 @@ public class Jogo {
 			System.out.println("O feixes de luz que a lâmina solta atraem a atenção de duas " + criatura.getNome()
 					+ ", obrigados vocês a lutar.");
 			System.out.println("Que arma você usa para lutar?");
-			System.out.println("1 - Espada");
-			System.out.println("2 - Arco e flecha");
+			for (Personagem esa : escolher) {
+				System.out.println(esa.getEscolhaArma());
+			}
 
 			int armaEscolhida = scanner.nextInt();
 
@@ -300,13 +314,13 @@ public class Jogo {
 
 	public static void criarLocalizacoesMapa() {
 		Localizacao local1 = new Localizacao();
-		local1.setLocal("Vale dos Sussurros");
+		local1.setLocal("1 - Vale dos Sussurros");
 
 		Localizacao local2 = new Localizacao();
-		local2.setLocal("Casa");
+		local2.setLocal("2 - Bosque da Perdição");
 
 		Localizacao local3 = new Localizacao();
-		local3.setLocal("IFSC");
+		local3.setLocal("3 - Montanha Nebulosa");
 
 		localizacoesMapa.add(local1);
 		localizacoesMapa.add(local2);
@@ -316,17 +330,75 @@ public class Jogo {
 	public static void criaTransportes() {
 
 		Transporte transporte1 = new Transporte();
-		transporte1.setMeioTransporte("A pé");
+		transporte1.setMeioTransporte("1 - A pé");
 
 		Transporte transporte2 = new Transporte();
-		transporte2.setMeioTransporte("De carruagem");
+		transporte2.setMeioTransporte("2 - De carruagem");
 
 		Transporte transporte3 = new Transporte();
-		transporte3.setMeioTransporte("A cavalo");
+		transporte3.setMeioTransporte("3 - A cavalo");
 
 		transportes.add(transporte1);
 		transportes.add(transporte2);
 		transportes.add(transporte3);
 	}
+
+	public static void criarInteracao() {
+		Interacao inter1 = new Interacao();
+		inter1.setIntera("1 - Cutucando ele.");
+
+		Interacao inter2 = new Interacao();
+		inter2.setIntera("2 - O chamando em voz alta");
+
+		interacoes.add(inter1);
+		interacoes.add(inter2);
+
+	}
 	
+	public static void criarIndo() {
+		Indo ir1 = new Indo();
+		ir1.setInd("1 - Esconderijo do lobo.");
+
+		Indo ir2 = new Indo();
+		ir2.setInd("2 - Taverna dos Reclusos.");
+
+		deslocar.add(ir1);
+		deslocar.add(ir2);
+
+	}
+	
+	public static void criarAjuda() {
+		Companheiro aj1 = new Companheiro();
+		aj1.setHelp("1 - Oferecendo dinheiro.");
+
+		Companheiro aj2 = new Companheiro();
+		aj2.setHelp("2 - Implorando.");
+
+		ajudar.add(aj1);
+		ajudar.add(aj2);
+
+	}
+	
+	public static void criarAbordagem() {
+		Interacao ab1 = new Interacao();
+		ab1.setAborda("1 - Oferecendo dinheiro.");
+
+		Interacao ab2 = new Interacao();
+		ab2.setAborda("2 - Implorando.");
+
+		abordar.add(ab1);
+		abordar.add(ab2);
+
+	}
+	public static void criarEscolha() {
+		Personagem ea1 = new Personagem();
+		ea1.setEscolhaArma("1 - Oferecendo dinheiro.");
+
+		Personagem ea2 = new Personagem();
+		ea2.setEscolhaArma("2 - Implorando.");
+
+		escolher.add(ea1);
+		escolher.add(ea2);
+
+	}
 }

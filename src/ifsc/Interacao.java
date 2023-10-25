@@ -5,6 +5,25 @@ public class Interacao {
 	private String habitante;
 	private String companheiro;
 	private String criatura;
+	private String intera;
+	private String aborda;
+
+	
+	public String getAborda() {
+		return aborda;
+	}
+
+	public void setAborda(String aborda) {
+		this.aborda = aborda;
+	}
+
+	public String getIntera() {
+		return intera;
+	}
+
+	public void setIntera(String intera) {
+		this.intera = intera;
+	}
 
 	public String getHabitante() {
 		return habitante;
