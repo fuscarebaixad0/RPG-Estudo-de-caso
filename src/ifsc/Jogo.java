@@ -118,7 +118,7 @@ public class Jogo {
 			System.out.println("4. Visualizar armas");
 			System.out.println("5. Sair do inventário e continuar o jogo");
 			System.out.print("Escolha uma opção: ");
-
+			System.out.println();
 			choice = scanner.nextInt();
 			scanner.nextLine();
 
