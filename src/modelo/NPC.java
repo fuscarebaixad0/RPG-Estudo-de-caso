@@ -1,4 +1,4 @@
-package ifsc.npc;
+package modelo;
 
 public class NPC {
 	private String nome;

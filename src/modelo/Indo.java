@@ -1,4 +1,4 @@
-package ifsc;
+package modelo;
 
 public class Indo {
 	private String ind;

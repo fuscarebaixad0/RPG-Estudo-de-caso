@@ -1,7 +1,9 @@
-package ifsc;
+package controle;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import modelo.Arma;
 
 public class Inventario {
 	private static ArrayList<Arma> inventario = new ArrayList<>();

@@ -1,4 +1,4 @@
-package ifsc.npc;
+package modelo;
 
 public class Lobo extends NPC {
 

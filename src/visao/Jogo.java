@@ -1,11 +1,18 @@
-package ifsc;
+package visao;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ifsc.npc.Companheiro;
-import ifsc.npc.Criatura;
-import ifsc.npc.Lobo;
+import controle.Inventario;
+import modelo.Arma;
+import modelo.Companheiro;
+import modelo.Criatura;
+import modelo.Indo;
+import modelo.Interacao;
+import modelo.Lobo;
+import modelo.Localizacao;
+import modelo.Personagem;
+import modelo.Transporte;
 
 public class Jogo {
 

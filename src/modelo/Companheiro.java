@@ -1,4 +1,4 @@
-package ifsc.npc;
+package modelo;
 
 public class Companheiro extends NPC {
 private String help;
