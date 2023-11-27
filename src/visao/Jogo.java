@@ -1,12 +1,15 @@
 package visao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import controle.Inventario;
 import modelo.Arma;
+import modelo.ArmaDAO;
 import modelo.Companheiro;
 import modelo.Criatura;
+import modelo.IArmaDAO;
 import modelo.Indo;
 import modelo.Interacao;
 import modelo.Lobo;
@@ -26,6 +29,7 @@ public class Jogo {
 	private static ArrayList<Arma> inventario = new ArrayList<>();
 
 	public static void main(String[] args) {
+		private static ArmaDAO armaDAO = new IArmaDAO();
 		Scanner scanner = new Scanner(System.in);
 		int vida = 100;
 		String nome;
@@ -141,11 +145,11 @@ public class Jogo {
 				String forcaArma = scanner.nextLine();
 
 				Arma novaArma = new Arma(nomeArma, modeloArma, tamanhoArma, forcaArma);
-				inventario.adicionarArma(novaArma);
+				armaDAO.adicionar(novaArma);
 				break;
 
 			case 2:
-				inventario.visualizarArma();
+				armaDAO.visualizar();
 				System.out.print("Digite o número da arma que deseja editar: ");
 				int indiceEditar = scanner.nextInt();
 				scanner.nextLine();
@@ -160,20 +164,20 @@ public class Jogo {
 				forcaArma = scanner.nextLine();
 
 				novaArma = new Arma(nomeArma, modeloArma, tamanhoArma, forcaArma);
-				inventario.editarArma(indiceEditar - 1, novaArma);
+				armaDAO.editar(indiceEditar - 1, novaArma);
 				break;
 
 			case 3:
-				inventario.visualizarArma();
+				armaDAO.visualizar();
 				System.out.print("Digite o número da arma que deseja excluir: ");
 				int indiceExcluir = scanner.nextInt();
 				scanner.nextLine();
 
-				inventario.excluirArma(indiceExcluir - 1);
+				armaDAO.excluir(indiceExcluir - 1);
 				break;
 
 			case 4:
-				inventario.visualizarArma();
+				armaDAO.visualizar();
 				try {
 					Thread.sleep(10000);
 				} catch (InterruptedException e) {
@@ -477,37 +481,27 @@ public class Jogo {
 	}
 
 	public static void adicionarArma(Arma arma) {
-		inventario.add(arma);
-		System.out.println("Nova arma cadastrada!");
-	}
+        armaDAO.inserir(arma);
+    }
 
-	public void editarArma(int indice, Arma novaArma) {
-		if (indice >= 0 && indice < inventario.size()) {
-			inventario.set(indice, novaArma);
-			System.out.println("Arma editada!");
-		} else {
-			System.out.println("Índice inválido.");
-		}
-	}
+    public void editarArma(int indice, Arma novaArma) {
+        armaDAO.editar(indice, novaArma);
+    }
 
-	public void excluirArma(int indice) {
-		if (indice >= 0 && indice < inventario.size()) {
-			inventario.remove(indice);
-			System.out.println("Arma excluída!");
-		} else {
-			System.out.println("Índice inválido.");
-		}
-	}
+    public void excluirArma(int indice) {
+        armaDAO.excluir(indice);
+    }
 
-	public void visualizarArma() {
-		if (inventario.isEmpty()) {
-			System.out.println("Seu inventário está vazio.");
-		} else {
-			for (int i = 0; i < inventario.size(); i++) {
-				System.out.println("Arma #" + (i + 1) + ":\n" + inventario.get(i));
+    public void visualizarArma() {
+        List<Arma> inventario = armaDAO.listar();
+        if (inventario.isEmpty()) {
+            System.out.println("Seu inventário está vazio.");
+        } else {
+            for (int i = 0; i < inventario.size(); i++) {
+                System.out.println("Arma #" + (i + 1) + ":\n" + inventario.get(i));
+            }
+        }
+    }
 
-			}
-		}
-	}
 
 }
