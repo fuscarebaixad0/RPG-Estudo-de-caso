@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import controle.Inventario;
+import controle.ArmaDAO;
 import modelo.Arma;
-import modelo.ArmaDAO;
 import modelo.Companheiro;
 import modelo.Criatura;
 import modelo.IArmaDAO;
@@ -27,9 +26,10 @@ public class Jogo {
 	private static ArrayList<Interacao> abordar = new ArrayList<>();
 	private static ArrayList<Personagem> escolher = new ArrayList<>();
 	private static ArrayList<Arma> inventario = new ArrayList<>();
-
+	
+	private static ArmaDAO armaDAO = ArmaDAO.getInstancia();
 	public static void main(String[] args) {
-		private static ArmaDAO armaDAO = new IArmaDAO();
+		
 		Scanner scanner = new Scanner(System.in);
 		int vida = 100;
 		String nome;
@@ -246,8 +246,8 @@ public class Jogo {
 			break;
 		}
 
-		int pedidoAjuda=Integer.MAX_VALUE;
-		
+		int pedidoAjuda = Integer.MAX_VALUE;
+
 		System.out.println("" + companheiro.getNome()
 				+ " e diz ter ouvido boatos sobre o paradeiro da lâmina eldir. Ele afirma ter ouvido habitantes discutindo sobre o esconderijo do temido lobo "
 				+ lobo.getNome()
@@ -383,7 +383,8 @@ public class Jogo {
 			}
 			break;
 		}
-	System.out.println("Após enfrentarem uma sucessão de desafios mortais, vocês retornam ao reino de Eldor, cavalgando em seus majestosos cavalos e trazendo consigo a magnífica lâmina de Eldir.");
+		System.out.println(
+				"Após enfrentarem uma sucessão de desafios mortais, vocês retornam ao reino de Eldor, cavalgando em seus majestosos cavalos e trazendo consigo a magnífica lâmina de Eldir.");
 		System.out.println(
 				"Depois de tantos anos, a Lâmina Eldir foi recuperada, trazendo luz e paz de volta ao reino de Eldor.");
 		System.out.println("FIM DO JOGO");
@@ -481,27 +482,26 @@ public class Jogo {
 	}
 
 	public static void adicionarArma(Arma arma) {
-        armaDAO.inserir(arma);
-    }
+		armaDAO.inserir(arma);
+	}
 
-    public void editarArma(int indice, Arma novaArma) {
-        armaDAO.editar(indice, novaArma);
-    }
+	public void editarArma(int indice, Arma novaArma) {
+		armaDAO.editar(indice, novaArma);
+	}
 
-    public void excluirArma(int indice) {
-        armaDAO.excluir(indice);
-    }
+	public void excluirArma(int indice) {
+		armaDAO.excluir(indice);
+	}
 
-    public void visualizarArma() {
-        List<Arma> inventario = armaDAO.listar();
-        if (inventario.isEmpty()) {
-            System.out.println("Seu inventário está vazio.");
-        } else {
-            for (int i = 0; i < inventario.size(); i++) {
-                System.out.println("Arma #" + (i + 1) + ":\n" + inventario.get(i));
-            }
-        }
-    }
-
+	public void visualizarArma() {
+		List<Arma> inventario = armaDAO.listar();
+		if (inventario.isEmpty()) {
+			System.out.println("Seu inventário está vazio.");
+		} else {
+			for (int i = 0; i < inventario.size(); i++) {
+				System.out.println("Arma #" + (i + 1) + ":\n" + inventario.get(i));
+			}
+		}
+	}
 
 }
