@@ -29,7 +29,13 @@ public class ArmaDAO implements IArmaDAO {
 	}
 
 	public boolean excluirArma(int indice) {
-		return inventario.add(null);
+		if (indice >= 0 && indice < inventario.size()) {
+			inventario.remove(indice);
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	public List<Arma> visualizarArmas() {

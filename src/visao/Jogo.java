@@ -1,6 +1,7 @@
 package visao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -180,11 +181,23 @@ public class Jogo {
 
 			case 3:
 				armaDAO.visualizarArmas();
+				i=0;
+					for (Arma arma : armaDAO.visualizarArmas()) {
+						System.out.println("Arma #" + i + ":\n" );
+						System.out.println("Nome: "+arma.getNomeArma());
+						System.out.println("Força: "+arma.getForcaArma());
+						System.out.println("Modelo: "+arma.getModeloArma());
+						System.out.println("Tamanho: "+arma.getTramanhoArma());
+						i++;
+						
+					}
 				System.out.print("Digite o número da arma que deseja excluir: ");
 				int indiceExcluir = scanner.nextInt();
 				scanner.nextLine();
-
+				inventario.remove(indiceExcluir);
+		           
 				armaDAO.excluirArma(indiceExcluir - 1);
+				armaDAO.excluirArma(indiceExcluir);
 				break;
 
 			case 4:
