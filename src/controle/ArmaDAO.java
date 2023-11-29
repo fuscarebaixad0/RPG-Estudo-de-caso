@@ -25,8 +25,15 @@ public class ArmaDAO implements IArmaDAO {
 	}
 
 	public boolean editarArma(int indice, Arma novaArma) {
-		return inventario.add(novaArma);
+		if (indice >= 0 && indice < inventario.size()) {
+			inventario.set(indice, novaArma);
+			return true;
+		} else {
+			return false;
+		}
 	}
+		
+	
 
 	public boolean excluirArma(int indice) {
 		if (indice >= 0 && indice < inventario.size()) {
