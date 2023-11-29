@@ -12,6 +12,7 @@ import modelo.Criatura;
 import modelo.IArmaDAO;
 import modelo.Indo;
 import modelo.Interacao;
+import modelo.Inventario;
 import modelo.Lobo;
 import modelo.Localizacao;
 import modelo.Personagem;
@@ -151,8 +152,7 @@ public class Jogo {
 				break;
 
 			case 2:
-				armaDAO.visualizarArmas();
-				i=0;
+				i=1;
 					for (Arma arma : armaDAO.visualizarArmas()) {
 						System.out.println("Arma #" + i + ":\n" );
 						System.out.println("Nome: "+arma.getNomeArma());
@@ -180,8 +180,7 @@ public class Jogo {
 				break;
 
 			case 3:
-				armaDAO.visualizarArmas();
-				i=0;
+				i=1;
 					for (Arma arma : armaDAO.visualizarArmas()) {
 						System.out.println("Arma #" + i + ":\n" );
 						System.out.println("Nome: "+arma.getNomeArma());
@@ -194,15 +193,11 @@ public class Jogo {
 				System.out.print("Digite o número da arma que deseja excluir: ");
 				int indiceExcluir = scanner.nextInt();
 				scanner.nextLine();
-				inventario.remove(indiceExcluir);
-		           
-				armaDAO.excluirArma(indiceExcluir - 1);
-				armaDAO.excluirArma(indiceExcluir);
+				armaDAO.excluirArma(indiceExcluir-1);
 				break;
 
 			case 4:
-				armaDAO.visualizarArmas();
-				i=0;
+				i=1;
 					for (Arma arma : armaDAO.visualizarArmas()) {
 						System.out.println("Arma #" + i + ":\n" );
 						System.out.println("Nome: "+arma.getNomeArma());
