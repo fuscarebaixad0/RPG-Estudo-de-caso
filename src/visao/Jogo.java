@@ -106,14 +106,14 @@ public class Jogo {
 			escolha = scanner.nextInt();
 
 			if (escolha == 1) {
-				personagem.exausto();
-				personagem.morte();
+				System.out.println("Você ficou exausto e não tinha muitos suprimentos.");
+					System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 				return;
 			} else if (escolha == 2 || escolha == 3) {
-				Personagem.chegou();
+				System.out.println("Chegou sem problemas.");
 
 			} else {
-				Personagem.opinv();
+					System.out.println("Opção inválida. Escolha novamente.");
 				return;
 			}
 			break;
@@ -133,6 +133,7 @@ public class Jogo {
 			choice = scanner.nextInt();
 			scanner.nextLine();
 
+			int i;
 			switch (choice) {
 			case 1:
 				System.out.print("Nome: ");
@@ -145,11 +146,21 @@ public class Jogo {
 				String forcaArma = scanner.nextLine();
 
 				Arma novaArma = new Arma(nomeArma, modeloArma, tamanhoArma, forcaArma);
-				armaDAO.adicionar(novaArma);
+				armaDAO.adicionarArma(novaArma);
 				break;
 
 			case 2:
-				armaDAO.visualizar();
+				armaDAO.visualizarArmas();
+				i=0;
+					for (Arma arma : armaDAO.visualizarArmas()) {
+						System.out.println("Arma #" + i + ":\n" );
+						System.out.println("Nome: "+arma.getNomeArma());
+						System.out.println("Força: "+arma.getForcaArma());
+						System.out.println("Modelo: "+arma.getModeloArma());
+						System.out.println("Tamanho: "+arma.getTramanhoArma());
+						i++;
+						
+					}
 				System.out.print("Digite o número da arma que deseja editar: ");
 				int indiceEditar = scanner.nextInt();
 				scanner.nextLine();
@@ -164,27 +175,34 @@ public class Jogo {
 				forcaArma = scanner.nextLine();
 
 				novaArma = new Arma(nomeArma, modeloArma, tamanhoArma, forcaArma);
-				armaDAO.editar(indiceEditar - 1, novaArma);
+				armaDAO.editarArma(indiceEditar - 1, novaArma);
 				break;
 
 			case 3:
-				armaDAO.visualizar();
+				armaDAO.visualizarArmas();
 				System.out.print("Digite o número da arma que deseja excluir: ");
 				int indiceExcluir = scanner.nextInt();
 				scanner.nextLine();
 
-				armaDAO.excluir(indiceExcluir - 1);
+				armaDAO.excluirArma(indiceExcluir - 1);
 				break;
 
 			case 4:
-				armaDAO.visualizar();
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				armaDAO.visualizarArmas();
+				i=0;
+					for (Arma arma : armaDAO.visualizarArmas()) {
+						System.out.println("Arma #" + i + ":\n" );
+						System.out.println("Nome: "+arma.getNomeArma());
+						System.out.println("Força: "+arma.getForcaArma());
+						System.out.println("Modelo: "+arma.getModeloArma());
+						System.out.println("Tamanho: "+arma.getTramanhoArma());
+						i++;
+						
+					}
+					break;
+			
 			case 5:
-				Personagem.chegou();
+				System.out.println("Chegou sem problemas.");
 				break;
 
 			default:
@@ -213,7 +231,7 @@ public class Jogo {
 			} else if (abordagem == 2) {
 				System.out.println("Ele te ajuda normalmente.");
 			} else {
-				Personagem.opinv();
+					System.out.println("Opção inválida. Escolha novamente.");
 				return;
 			}
 			break;
@@ -233,13 +251,13 @@ public class Jogo {
 			if (destino == 1) {
 				System.out.println(
 						"Você foi para o esconderijo de " + lobo.getNome() + " sozinho e foi derrotado pelo animal.");
-				personagem.morte();
+					System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 				return;
 			} else if (destino == 2) {
 				System.out.println(
 						"Você foi para a Taverna e lá conheceu um viking chamado " + companheiro.getNome() + ".");
 			} else {
-				Personagem.opinv();
+					System.out.println("Opção inválida. Escolha novamente.");
 				return;
 			}
 
@@ -265,10 +283,10 @@ public class Jogo {
 			} else if (pedidoAjuda == 2) {
 				System.out.println("" + companheiro.getNome() + " recusa seu pedido e você decide derrotar "
 						+ lobo.getNome() + " sozinho.");
-				personagem.morte();
+					System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 				return;
 			} else {
-				Personagem.opinv();
+					System.out.println("Opção inválida. Escolha novamente.");
 				return;
 			}
 			break;
@@ -282,14 +300,14 @@ public class Jogo {
 			int escolhaTransporteCaverna = scanner.nextInt();
 
 			if (escolhaTransporteCaverna == 1) {
-				personagem.exausto();
-				personagem.morte();
+				System.out.println("Você ficou exausto e não tinha muitos suprimentos.");
+					System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 				return;
 			} else if (escolhaTransporteCaverna == 2 || escolhaTransporteCaverna == 3) {
-				Personagem.chegou();
+				System.out.println("Chegou sem problemas.");
 
 			} else {
-				Personagem.opinv();
+					System.out.println("Opção inválida. Escolha novamente.");
 				return;
 			}
 			break;
@@ -314,17 +332,17 @@ public class Jogo {
 			int escolhaTransporteColina = scanner.nextInt();
 
 			if (escolhaTransporteColina == 1) {
-				personagem.exausto();
-				personagem.morte();
+				System.out.println("Você ficou exausto e não tinha muitos suprimentos.");
+					System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 				return;
 			} else if (escolhaTransporteColina == 2) {
 				System.out.println("A carruagem cai de uma montanha alta e estreita.");
-				personagem.morte();
+					System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 				return;
 			} else if (escolhaTransporteColina == 3) {
-				Personagem.chegou();
+				System.out.println("Chegou sem problemas.");
 			} else {
-				Personagem.opinv();
+					System.out.println("Opção inválida. Escolha novamente.");
 				return;
 			}
 			break;
@@ -345,7 +363,7 @@ public class Jogo {
 
 			if (abordagemCastelo == 1) {
 				System.out.println("As " + criatura.getNome() + " são muitas para você e. " + companheiro.getNome());
-				personagem.morte();
+					System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 				return;
 			} else if (abordagemCastelo == 2) {
 				System.out.println(
@@ -375,10 +393,10 @@ public class Jogo {
 						+ " são derrotados sem muito esforço e vocês saem do castelo em segurança.");
 			} else if (armaEscolhida == 2) {
 				System.out.println("As flechas não são fortes o suficiente para atravessar a pele dos inimigos.");
-				personagem.morte();
+					System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
 				return;
 			} else {
-				Personagem.opinv();
+					System.out.println("Opção inválida. Escolha novamente.");
 				return;
 			}
 			break;
@@ -482,19 +500,19 @@ public class Jogo {
 	}
 
 	public static void adicionarArma(Arma arma) {
-		armaDAO.inserir(arma);
+		armaDAO.adicionarArma(arma);
 	}
 
 	public void editarArma(int indice, Arma novaArma) {
-		armaDAO.editar(indice, novaArma);
+		armaDAO.editarArma(indice, novaArma);
 	}
 
 	public void excluirArma(int indice) {
-		armaDAO.excluir(indice);
+		armaDAO.excluirArma(indice);
 	}
 
 	public void visualizarArma() {
-		List<Arma> inventario = armaDAO.listar();
+		List<Arma> inventario = armaDAO.visualizarArmas();
 		if (inventario.isEmpty()) {
 			System.out.println("Seu inventário está vazio.");
 		} else {

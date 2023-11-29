@@ -50,22 +50,6 @@ public class Personagem {
 		this.dano = dano;
 	}
 
-	public void morte() {
-		System.out.println("Você morreu. Mais sorte na próxima aventureito!!!");
-	}
-
-	public void exausto() {
-		System.out.println("Você ficou exausto e não tinha muitos suprimentos.");
-	}
-
-	public static void chegou() {
-		System.out.println("Chegou sem problemas.");
-	}
-
-	public static void opinv() {
-		System.out.println("Opção inválida. Escolha novamente.");
-	}
-
 	public String getNome() {
 		return nome;
 	}
